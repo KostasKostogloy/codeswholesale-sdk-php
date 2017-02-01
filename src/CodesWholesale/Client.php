@@ -130,7 +130,7 @@ class Client extends Magic
         $productsInStock = [];
         foreach($products as $product){
             //if ($product->getStockQuantity()){
-            $productsInStock[$product->getHref()] = $product->getName().' - '.$product->getPlatform().' - '.$product->getPrice().'€';
+            $productsInStock[$product->getHref()] = $product->getName().' - '.$product->getPlatform().' - '.$product->getLowestPrice().'€';
             //}
         }
 
@@ -143,7 +143,7 @@ class Client extends Magic
         $productsInStock = [];
         foreach($products as $product){
             if ($product->getStockQuantity()){
-            $productsInStock[$product->getHref()] = $product->getName().' - '.$product->getPlatform().' - '.$product->getPrice().'€';
+            $productsInStock[$product->getHref()] = $product->getName().' - '.$product->getPlatform().' - '.$product->getLowestPrice().'€';
             }
         }
 
