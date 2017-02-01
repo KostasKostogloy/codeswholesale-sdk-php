@@ -103,6 +103,42 @@ class Client extends Magic
     }
 
     /**
+     *
+     * @param array $options
+     * @return \CodesWholesale\Resource\ProductList
+     */
+    public function getProductsInStock(array $options = array())
+    {
+        $products = $this->dataStore->getResource('/products', CodesWholesale::PRODUCT_LIST, $options);
+        $productsInStock = [];
+        foreach($products as $product){
+            if ($product->getStockQuantity()){
+                $productsInStock[] = $product;
+            }
+        }
+        return $productsInStock;
+    }
+
+    /**
+     *
+     * @param array $options
+     * @return array
+     */
+    public function getProductsListData(array $options = array())
+    {
+        $products = $this->dataStore->getResource('/products', CodesWholesale::PRODUCT_LIST, $options);
+        $productsInStock = [];
+        foreach($products as $product){
+            //if ($product->getStockQuantity()){
+            $productsInStock[$product->getHref()] = $product->getName().' - '.$product->getPlatform().' - '.$product->getPrice().'€';
+            //}
+        }
+
+        return $productsInStock;
+    }
+
+
+    /**
      * Method will return product that was bought.
      *
      * @return object
