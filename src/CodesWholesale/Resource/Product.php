@@ -144,6 +144,23 @@ class Product extends Resource
     }
 
     /**
+     * Alias for getLowerstPrice
+     *
+     * @return decimal
+     */
+    public function getPrice()
+    {
+        $prices = $this->getPrices();
+        $lowest = $prices[0]->value;
+        foreach ($prices as $price) {
+            if ($price->value < $lowest) {
+                $lowest = $price->value;
+            }
+        }
+        return $lowest;
+    }
+
+    /**
      * @return string|uri
      */
     public function getBuyHref()
